@@ -165,9 +165,10 @@ def health():
 
 @bottle.route("/")
 @bottle.route("/<timezone:path>")
+@bottle.route("/<timezone:path>/")
 def get_time(timezone="UTC"):
     tz_info = pytz.timezone("UTC")
-    timezone = str(timezone).strip()
+    timezone = str(timezone).strip().rstrip("/")
     if timezone != "UTC":
         if timezone and timezone in pytz.all_timezones:
             tz_info = pytz.timezone(timezone)

@@ -18,11 +18,15 @@ There are 2 ways to use this:
 ### Docker Service
 The latest docker image is available at my docker hub.
 [You can find it here](https://hub.docker.com/r/tecktron/timeservice)
+
+#### Docker Example
 ```
 docker pull tecktron/timeservice:latest
-docker run -p 8182:80 tecktron/timeservice:latest
+docker run -d -p 8182:80 --name timeservice tecktron/timeservice:latest
 ```
 This will bring up the service running locally on port 8182 (I.E., `http://localhost:8182/`).
+
+To stop the service, run `docker stop timeservice`.
 
 ### Local server
 You can of course just run this locally.
@@ -31,9 +35,9 @@ You can of course just run this locally.
 2. Create a local Python virtual environment and activate it (e.g., `python -m venv ./.venv && source ./.venv/bin/activate`)
 3. Install the system packages for [bjoern](https://github.com/jonashaag/bjoern) (on ubuntu/debian this is `sudo apt -y install gcc libev-dev`)
 4. Install the requirements using pip (e.g., `pip install -r requirements.txt`)
-5. Run the service: `python timeservice.py` to start the server.
+5. Run the service: `python timeservice.py`.
 6. Open your browser to `http://localhost:8182/` to see the time.
-7. You can control the host and the port with the environment variables `TS_HOST` and `TS_PORT` respectively, These default to host `127.0.0.1` and port `8182`.
+7. You can control the host and port with the environment variables `TS_HOST` and `TS_PORT`, which default to `127.0.0.1` and `8182` respectively.
 
 ## How to Use
 

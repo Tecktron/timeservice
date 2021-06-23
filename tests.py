@@ -98,11 +98,12 @@ def test_get_time():
     utc = datetime.now(tzinfo).isoformat()
     assert timeservice.get_time() == utc
 
+    assert timeservice.get_time("Unknown") == utc
+
     tzinfo = pytz.timezone("America/New_York")
     nyc = datetime.now(tzinfo).isoformat()
     assert timeservice.get_time("America/New_York") == nyc
-
-    assert timeservice.get_time("Unknown") == utc
+    assert timeservice.get_time("America/New_York/") == nyc
 
 
 @freeze_time("2021-01-01 00:00:00", tz_offset=0)
@@ -111,7 +112,9 @@ def test_get_time():
     (
         (None, OrderedDict([("America/New_York", "-0500"), ("UTC", "+0000"), ("Asia/Tehran", "+0330")])),
         ("-05", OrderedDict([("America/New_York", "-0500")])),
+        ("-05/", OrderedDict([("America/New_York", "-0500")])),
         ("asia", OrderedDict([("Asia/Tehran", "+0330")])),
+        ("asia/", OrderedDict([("Asia/Tehran", "+0330")])),
         ("exception", OrderedDict([("America/New_York", "-0500"), ("UTC", "+0000"), ("Asia/Tehran", "+0330")])),
     ),
 )
