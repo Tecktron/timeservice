@@ -1,7 +1,7 @@
 FROM tecktron/python-bjoern:latest-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
-ENV APP_MODULE=timeserver:app
+ENV APP_MODULE=timeservice:app
 
 COPY . /app
 RUN chmod +x /app/prestart.sh
