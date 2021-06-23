@@ -7,9 +7,7 @@ workflows:
   lint-and-test:
     jobs:
       - lint
-      - test-and-report:
-          context:
-            - codecov
+      - test-and-report
 
 jobs:
   lint:
@@ -17,6 +15,11 @@ jobs:
       - image: cimg/python:3.8
     steps:
       - checkout
+      - run:
+          name: Install system dependencies
+          command: |
+            sudo apt-get update
+            sudo apt-get -y install --no-install-recommends gcc libev-dev
       - python/install-packages:
           args: isort black flake8 --upgrade
           pkg-manager: pip
@@ -36,6 +39,11 @@ jobs:
       - image: cimg/python:3.8
     steps:
       - checkout
+      - run:
+          name: Install system dependencies
+          command: |
+            sudo apt-get update
+            sudo apt-get -y install --no-install-recommends gcc libev-dev
       - run:
           name: Install dependencies
           command: |
