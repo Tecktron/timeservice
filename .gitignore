@@ -1,0 +1,27 @@
+# IDE stuff
+.idea/
+*.iml
+
+# because macs
+*.DS_Store
+
+# environments
+*venv*/
+.tox/
+*.pid
+.env
+
+# python stuff
+__pycache__/
+*.py[cod]
+.Python
+*.egg-info/
+*.egg
+build/
+dist/
+
+# pytest
+.pytest_cache/
+.coverage
+pytest.ini
+coverage.xml
