@@ -93,10 +93,13 @@ def test_render_zones(accept, expected, content_type, mocker):
 
 
 @freeze_time("2021-01-01 00:00:00", tz_offset=0)
-def test_get_time():
+def test_get_time(mocker):
+    set_header = mocker.patch("timeservice.bottle.response.set_header")
     tzinfo = pytz.timezone("UTC")
     utc = datetime.now(tzinfo).isoformat()
     assert timeservice.get_time() == utc
+    assert set_header.called is True
+    assert set_header.call_count == 5
 
     assert timeservice.get_time("Unknown") == utc
 
