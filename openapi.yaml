@@ -1,0 +1,127 @@
+openapi: "3.0.3"
+info:
+  title: TimeService
+  description: A simple service that gives time
+  contact:
+    url: https://github.com/Tecktron/timeservice
+  version: 1.0.0
+paths:
+  /:
+    summary: Get the current UTC time
+    get:
+      responses:
+        '200':
+          $ref: '#/components/responses/time'
+  /{timezone}:
+    summary: Get the current time in the requested time zone.
+    get:
+      parameters:
+        - in: path
+          name: timezone
+          description: The name of a time zone
+          required: true
+          schema:
+            type: string
+          examples:
+            GMT:
+              value: 'GMT'
+            'Asia/Taipei':
+              value: 'Asia/Taipei'
+            'America/Argentina/Buenos_Aires':
+              value: 'America/Argentina/Buenos_Aires'
+      responses:
+        '200':
+          $ref: '#/components/responses/time'
+  /timezones:
+    summary: Get a list of all timezones
+    get:
+      responses:
+        '200':
+          $ref: '#/components/responses/timeZones'
+  /timezones/{filter}:
+    summary: Get a filtered list of timezones
+    get:
+      parameters:
+        - in: path
+          name: filter
+          description: The offset or area to filter by
+          required: true
+          schema:
+            type: string
+          examples:
+              full_offset:
+                value: '+0500'
+              half_hour_offset:
+                value: '-0930'
+              half_hour_min_offset:
+                value: '430'
+              double_digit_offset:
+                value: '01'
+              single_digit_offset:
+                value: '9'
+              negative_sinlge_digit_offset:
+                value: '-8'
+              area:
+                value: 'antarctica'
+      responses:
+        '200':
+          $ref: '#/components/responses/timeZones'
+  /health:
+    get:
+      responses:
+        '200':
+          description: System is up
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Ok
+  /help:
+    get:
+      responses:
+        '200':
+          description: The HTML help page.
+          content:
+            text/html:
+              schema:
+                type: string
+components:
+  responses:
+    time:
+      description: The time in ISO-8601 format
+      content:
+        text/plain:
+          schema:
+            type: string
+            format: date-time
+            example: '2021-01-01T00:00:00.000000+00:00'
+    timeZones:
+      description: The output of
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: |
+              Antarctica/Palmer: -0300
+              Antarctica/Troll: +0200
+              Antarctica/South_Pole: +1200
+        text/html:
+          schema:
+            type: string
+        text/csv:
+          schema:
+            type: string
+            example: |
+              "timezone","UTC offset"
+              "Antarctica/Palmer","-0300"
+              "Antarctica/Troll","+0200"
+              "Antarctica/South_Pole","+1200"
+        application/json:
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+            example:
+              Antarctica/Palmer: '-0300'
+              Antarctica/Troll: '+0200'
+              Antarctica/South_Pole: '+1200'

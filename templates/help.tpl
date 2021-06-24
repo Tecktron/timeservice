@@ -7,10 +7,9 @@
   <body>
     <h1>TimeService Help</h1>
     <h2>Introduction</h2>
-    <p>TimeService is a simple service that gives time in a requested time zone
-      or in UTC. The time is represented as an ISO-8601 string. This service
-      also includes the list of available time zones optionally filtered by UTC
-      offset or area.</p>
+    <p>TimeService is a simple service that gives time in UTC, or a requested time zone,
+       represented as an ISO-8601 string. This service also includes the list of available
+       time zones optionally filtered by the UTC offset or an area.</p>
     <h2>How to Use</h2>
     <h3>Get the time</h3>
     <p>To get the time in UTC (the default time zone) just make a request to the

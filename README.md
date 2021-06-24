@@ -2,10 +2,9 @@
 
 # TimeService
 
-TimeService is a simple service that gives time in a requested time zone
-or in UTC. The time is represented as an ISO-8601 string. This service
-also includes the list of available time zones optionally filtered by UTC
-offset or area.
+TimeService is a simple service that gives time in UTC, or a requested time zone,
+represented as an ISO-8601 string. This service also includes the list of available
+time zones optionally filtered by the UTC offset or an area.
 
 ## Requirements
  - Python 3.8+ or Docker
