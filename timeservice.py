@@ -172,7 +172,13 @@ def get_time(timezone="UTC"):
     if timezone != "UTC":
         if timezone and timezone in pytz.all_timezones:
             tz_info = pytz.timezone(timezone)
-    return datetime.now(tz_info).isoformat()
+    isotime = datetime.now(tz_info).isoformat()
+    bottle.response.set_header("Content-Type", "text/plain; charset=UTF-8")
+    bottle.response.set_header("Cache-Control", "no-cache, no-store, must-revalidate")
+    bottle.response.set_header("Pragma", "no-cache")
+    bottle.response.set_header("Expires", "0")
+    bottle.response.set_header("Date", isotime)
+    return isotime
 
 
 if __name__ == "__main__":  # pragma: no cover
