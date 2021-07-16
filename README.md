@@ -41,12 +41,19 @@ You can of course just run this locally.
 ## How to Use
 
 ### Get the time
-To get the time in UTC (the default time zone) just make a request to the `/` endpoint
+To get the time in UTC (the default time zone) just make a request to the `/` endpoint (I.E., `http://localhost:8182/`)
 
-To get the time in a different time zone just make a request to the name of the time zone. For example, to get the time of New York, request the `/America/New_York` time zone.
+To get the time in a different time zone just make a request to the name of the time zone. For example, to get the time of New York, request the `/America/New_York` time zone. (I.E., `http://localhost:8182/America/New_York`)
 
 ### Get time zones
-To get the list of supported time zones, make a request to the `/timezones` endpoint. The output can be controlled using the _HTTP Accept_ header. Supported types are: JSON (application/json), HTML (text/html), CSV with header (text/csv) and plain text (text/plain) as default.
+To get the list of supported time zones, make a request to the `/timezones` endpoint (I.E., `http://localhost:8182/timezones`).
+
+The output type can be controlled using the _HTTP Accept_ header. Supported types are:
+- JSON: *application/json*
+- HTML: *text/html*
+- CSV with header: *text/csv*
+- Text (default): *text/plain*
+
 
 ### Filtering time zones
 You can filter time zones in two ways:
@@ -54,15 +61,15 @@ You can filter time zones in two ways:
 #### UTC offset
 This will return all the time zones for the requested offset.
 
-To filter time zones by their UTC offset, simply add the offset for the time zones you want, for example, to get UTC -0500 you can use `/timezones/-0500` (-05, -5 are also valid).
+To filter time zones by their UTC offset, simply add the offset for the time zones you want, for example, to get UTC +0500 you can use `/timezones/+0500` (I.E., `http://localhost:8182/timezones/+0500`). Values of `+05`, `05`, `+500`, `500`, `+5` and `5` are also valid and yield the same results.
 
 #### Area
 This will return all the time zones of the requested area.
 
-Some time zones include an area and a location. For example, in the time zone named "America/New_York", "America" is the area and "New York" is the location. If you want to know all the time zones for an area, for example Antarctica, you can make a request to `/timezones/antarctica`.
+Some time zones include an area and a location. For example, in the time zone named "America/New_York", "America" is the area and "New York" is the location. If you want to know all the time zones for an area, for example Antarctica, you can make a request to `/timezones/antarctica` (I.E., `http://localhost:8182/timezones/antarctica`).
 
 ### Display Help
-To display the above help at any time, you can use `/help` endpoint.
+To display the above help at any time, you can use `/help` endpoint (I.E., `http://localhost:8182/help`).
 
 ## Help and support
 If you need help or find a bug or would like to ask for a feature (you could build it, see
@@ -86,4 +93,4 @@ Before submitting any code please be sure you have done the following:
 Every bit of code you submit must be fully tested.
 All testing is done using pytest, please follow pytest style testing (not unittest).
 You can simply use tox to run the tests: `tox -e py39`. This supports environments
-`py36` - `py39`.
+`py38` - `py39`.
