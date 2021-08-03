@@ -4,7 +4,6 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV APP_MODULE=timeservice:app
 
 COPY . /app
-RUN chmod +x /app/prestart.sh
 WORKDIR /app/
 
 RUN python -m pip install pip --no-cache-dir --upgrade
